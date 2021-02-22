@@ -38,7 +38,7 @@ namespace ShapeToXodr
             }
             else
             {
-                Sel_path_lab.Text = "Not Selected.";
+                Sel_path_lab.Text = "Not Selected";
                 Out_ref_shape.Enabled = Out_xodr.Enabled = Xodr_name_text.Enabled = Shp_name_text.Enabled = false;
             }
         }
