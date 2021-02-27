@@ -423,7 +423,7 @@ namespace ShapeToXodr
         private static List<string> getFileList(DirectoryInfo path) // .shp인 모든 파일의 이름을 가져오는함수 A2_LANE2 같은 이름도 가져옴
         {
             FileInfo[] shps;
-            //NGII HD Map Layer List 추가후 검증 리스트에 없는 일므일경우 확인 필요
+            //NGII HD Map Layer List 추가후 검증 리스트에 없는 이름일경우 확인 필요
             try
             {
                 shps = path.GetFiles("*.shp"); // .shp인 파일을 리스트로 반환

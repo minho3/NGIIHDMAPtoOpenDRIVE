@@ -88,14 +88,14 @@ namespace ShapeToXodr
         {
             toXODR OpenDRIVE = new toXODR();
 
-            for (int i = 0; i < movPoint_R.lnkID.Length; i++)
+            for (int i = 0; i < movPoint_R.lnkID.Length; i++)//오른쪽 ReferenceLine 생성
             {
                 OpenDRIVE.RefData(movPoint_R.hdgList2D[i], movPoint_R.movPoint2D[i], movPoint_R.Length2D[i], movPoint_R.lnkID[i], movPoint_R.ptData[i, 1]);
             }
             OpenDRIVE.AddLane(laneCounter_R.lanesCounter, refLineCreator.rootToEnd_R);
             OpenDRIVE.Make_Road_LinkData(refLineCreator.rootToEnd_R, movPoint_R.lnkID);
 
-            if (Xodr_name_text.Text != "")
+            if (Xodr_name_text.Text != "")//출력시 지정된 텍스트 여부 확인
             {
                 OpenDRIVE.XMLSave(Xodr_name_text.Text);
             }
