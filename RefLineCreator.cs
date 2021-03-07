@@ -42,7 +42,7 @@ namespace ShapeToXodr
         */
         private string[] R_NodeList = { "A119BS030904", "A119BS030836", "A119BS032005", "A119BS032064", "A119BS030042", "A119BS030147", "A119BS031573", "A119BS030827", "A119BS031948", "A119BS031701", "A119BS030093", "A119BS030250", "A119BS030736", "A119BS030160", "A119BS030011", "A119BS032056", "A119BS030779", "A119BS031453", "A119BS031913", "A119BS030525", "A119BS031293", "A119BS032015", "A119BS031673", "A119BS032048", "A119BS030027", "A119BS031634", "A119BS031457", "A119BS031243", "A119BS030249" };
         //우측 기준 노드리스트
-        private string[] L_NodeList;
+        private string[] L_NodeList; //{ "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
         //좌측 기준 노드리스트 예정
         public SHPReader.Single_Layer A1_NODE;
         public SHPReader.Single_Layer A2_LINK;
@@ -118,7 +118,7 @@ namespace ShapeToXodr
 
         public void LrefLineCreator()//왼쪽 referenceLine 기준 link를 찾는 메소드
         {
-            string[] LNodeList = { "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008" };
+            string[] LNodeList = { "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
             foreach (string lst in LNodeList)
             {
                 Root_Node = lst;
@@ -232,7 +232,7 @@ namespace ShapeToXodr
             rootLink = RootCheckSumLaneNo(r_Links, hookLink);
         }
 
-        private bool ExeptionAdd_R(object dbfNodeId, object ID) //링크 찾을때 예외처리사항
+        private bool ExeptionAdd_R(object dbfNodeId, object ID) //링크 찾을때 예외 추가사항
         {
             if (dbfNodeId.ToString() == "A119BS030192" && ID.ToString() == "A219BS032033"
                 || dbfNodeId.ToString() == "A119BS030898" && ID.ToString() == "A219BS031577"
@@ -248,7 +248,7 @@ namespace ShapeToXodr
                 || dbfNodeId.ToString() == "A119BS031435" && ID.ToString() == "A219BS030977"
                 || dbfNodeId.ToString() == "A119BS031779" && ID.ToString() == "A219BS031307"
                 || dbfNodeId.ToString() == "A119BS031544" && ID.ToString() == "A219BS031913"
-                || dbfNodeId.ToString() == "A119BS031581" && ID.ToString() == "A219BS031263")
+                || dbfNodeId.ToString() == "A119BS031581" && ID.ToString() == "A219BS031263") // 추가할 링크의 toNodeID 와 ID를 넣음
             {
                 return true;
             }
