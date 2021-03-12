@@ -78,7 +78,7 @@ namespace ShapeToXodr
             movPoint_R = new MovPoint(ref refLineCreator.RefLinks_R);
             laneCounter_R = new LaneCounter(refLineCreator.A2_LINK, movPoint_R.lnkID);
             laneCounter_R.FixExtraLane(refLineCreator.rootToEnd_R);
-            movPoint_R.SubsGeo(allLayers[2].BoundBox);
+            //movPoint_R.SubsGeo(allLayers[2].BoundBox);
 
             Layer_Conv.Enabled = false;
             Out_ref_shape.Enabled = Out_xodr.Enabled = Xodr_name_text.Enabled = Shp_name_text.Enabled = true;
@@ -87,6 +87,8 @@ namespace ShapeToXodr
         private void Out_xodr_Click(object sender, EventArgs e)
         {
             toXODR OpenDRIVE = new toXODR();
+
+			movPoint_R.SubsGeo(allLayers[2].BoundBox);
 
             for (int i = 0; i < movPoint_R.lnkID.Length; i++)//오른쪽 ReferenceLine 생성
             {
