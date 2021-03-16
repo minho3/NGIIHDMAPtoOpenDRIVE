@@ -82,6 +82,8 @@ namespace ShapeToXodr
 
             Layer_Conv.Enabled = false;
             Out_ref_shape.Enabled = Out_xodr.Enabled = Xodr_name_text.Enabled = Shp_name_text.Enabled = true;
+
+			//add test or anything
         }
 
         private void Out_xodr_Click(object sender, EventArgs e)
