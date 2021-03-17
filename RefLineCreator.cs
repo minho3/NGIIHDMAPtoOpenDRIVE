@@ -42,7 +42,7 @@ namespace ShapeToXodr
         */
         private string[] R_NodeList = { "A119BS030904", "A119BS030836", "A119BS032005", "A119BS032064", "A119BS030042", "A119BS030147", "A119BS031573", "A119BS030827", "A119BS031948", "A119BS031701", "A119BS030093", "A119BS030250", "A119BS030736", "A119BS030160", "A119BS030011", "A119BS032056", "A119BS030779", "A119BS031453", "A119BS031913", "A119BS030525", "A119BS031293", "A119BS032015", "A119BS031673", "A119BS032048", "A119BS030027", "A119BS031634", "A119BS031457", "A119BS031243", "A119BS030249" };
         //우측 기준 노드리스트
-        private string[] L_NodeList; //{ "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
+        private string[] L_NodeList = { "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
         //좌측 기준 노드리스트 예정
         public SHPReader.Single_Layer A1_NODE;
         public SHPReader.Single_Layer A2_LINK;
@@ -118,7 +118,7 @@ namespace ShapeToXodr
 
         public void LrefLineCreator()//왼쪽 referenceLine 기준 link를 찾는 메소드
         {
-            string[] LNodeList = { "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
+            //string[] LNodeList = { "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
             foreach (string lst in LNodeList)
             {
                 Root_Node = lst;
@@ -329,6 +329,30 @@ namespace ShapeToXodr
             }
         }
 
+		private bool ExeptionAdd_L(object dbfNodeId, object ID) //링크 찾을때 예외처리사항
+        {
+            if (dbfNodeId.ToString() == "A119BS031775" && ID.ToString() == "A219BS031224"
+                || dbfNodeId.ToString() == "A119BS030355" && ID.ToString() == "A219BS032056"
+                || dbfNodeId.ToString() == "A119BS030364" && ID.ToString() == "A219BS030648"
+                || dbfNodeId.ToString() == "A119BS030866" && ID.ToString() == "A219BS031955"
+                || dbfNodeId.ToString() == "A119BS031474" && ID.ToString() == "A219BS031865"
+                || dbfNodeId.ToString() == "A119BS031445" && ID.ToString() == "A219BS030987")
+            {
+                return true;
+            }
+            return false;
+        }
+
+		private bool ExeptionEnd_L(object ID)
+        {
+            if (ID.ToString() == "A219BS031089" || ID.ToString() == "A219BS030518"
+                || ID.ToString() == "A219BS031954" || ID.ToString() == "A219BS031864")
+            {
+                return true;
+            }
+            return false;
+        }
+
         private void NextLink_L(SHPReader.SHPData profile)//다음 link를 찾는 메소드 (좌측)
         {
             object R_LinkID_tm;
@@ -344,16 +368,13 @@ namespace ShapeToXodr
 
             for (int i = 0; i < A2DataLength; i++)
             {
-                if (profile.DBFData["ID"].ToString() == "A219BS030419" || profile.DBFData["ID"].ToString() == "A219BS030426"
-                    || profile.DBFData["ID"].ToString() == "A219BS031468" || profile.DBFData["ID"].ToString() == "A219BS030241"
-                    || profile.DBFData["ID"].ToString() == "A219BS030394" || profile.DBFData["ID"].ToString() == "A219BS030239"
-                    || profile.DBFData["ID"].ToString() == "A219BS030290")//예외 처리 - 종료
+                if (ExeptionEnd_L(profile.DBFData["ID"]))//예외 처리 - 종료
                 {
                     continue;
                 }
 
-                if ((A2_LINK.SHPData[i].DBFData["FromNodeID"].ToString() == profile.DBFData["ToNodeId"].ToString() && Convert.ToDouble(A2_LINK.SHPData[i].DBFData["LaneNo"]) == 1))//예외 추가
-
+                if ((A2_LINK.SHPData[i].DBFData["FromNodeID"].ToString() == profile.DBFData["ToNodeId"].ToString() && Convert.ToDouble(A2_LINK.SHPData[i].DBFData["LaneNo"]) == 1)
+					|| ExeptionAdd_L(profile.DBFData["ToNodeId"], A2_LINK.SHPData[i].DBFData["ID"]))//예외 추가
                 {
                     if (A2_LINK.SHPData[i].DBFData["ID"].ToString() == "A219BS031127" || A2_LINK.SHPData[i].DBFData["ID"].ToString() == "A219BS031129")//예외 스킵
                     {
