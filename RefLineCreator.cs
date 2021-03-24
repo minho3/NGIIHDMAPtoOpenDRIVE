@@ -119,7 +119,7 @@ namespace ShapeToXodr
         public void LrefLineCreator()//왼쪽 referenceLine 기준 link를 찾는 메소드
         {
             //string[] LNodeList = { "A119BS030723", "A119BS031861", "A119BS030889", "A119BS030805", "A119BS031145", "A119BS031125", "A119BS031027", "A119BS030008", "A119BS031579", "A119BS030902", "A119BS030602", "A119BS030563", "A119BS030720", "A119BS031973", "A119BS031925", "A119BS030094", "A119BS030088", "A119BS030253", "A119BS030655", "A119BS030239", "A119BS030164", "A119BS030559", "A119BS031337", "A119BS031318", "A119BS031282", "A119BS030728", "A119BS031568","A119BS031467" };
-            foreach (string lst in LNodeList)
+            foreach (string lst in L_NodeList)
             {
                 Root_Node = lst;
 
