@@ -204,7 +204,7 @@ namespace ShapeToXodr
             MainBox = ReadBbox(fs, true);
         }
 
-        private static void ReadContentHeader(FileStream fs) // 컨텐츠(레코드) 헤더를 건너뛰는 함수 컨텐츠 번호화 타입이 들어가있지만 필요가 없음
+        private static void ReadContentRHeader(FileStream fs) // 컨텐츠(레코드) 헤더를 건너뛰는 함수 컨텐츠 번호화 타입이 들어가있지만 필요가 없음
         {
             JumpXBytes(fs, 8);
         }
